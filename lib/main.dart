@@ -1,4 +1,5 @@
 import 'package:dog_app/bloc/bloc.dart';
+import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_creandose.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -27,7 +28,14 @@ class Aplicacion extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: Builder(builder: (context) {
-          return const Text("Este es un texto de aviso");
+          var estado = context.watch<BlocVerificacion>().state;
+
+          if (estado is Creandose) {
+            return const VistaCreandose();
+          }
+          return const Center(
+            child: Text("Este mensaje es una alerta"),
+          );
         }),
       ),
     );
