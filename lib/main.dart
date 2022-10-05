@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
-  runApp(const Aplicacion());
+  runApp(const AplicacionInyectada());
 }
 
 class AplicacionInyectada extends StatelessWidget {
