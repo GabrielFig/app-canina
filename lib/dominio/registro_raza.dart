@@ -3,25 +3,30 @@ import 'package:fpdart/fpdart.dart';
 const String mensajeRegistradoRazaError = "No introdujiste bien el nombre";
 
 class RegistroRaza {
-  late final String nombreRaza;
-  late final Either<String, List<String>> subRazas;
+  late final List mensaje;
+  late final String status;
 
-  RegistroRaza._(this.nombreRaza, this.subRazas);
+  RegistroRaza._(
+    this.mensaje,
+    this.status,
+  );
 
-  factory RegistroRaza.constructor(
-      {required String propuestaRaza,
-      required List<String> propuestaSubRazas}) {
-    Either<String, List<String>> checkSubRazas_(List<String> posiblesSubRazas) {
-      if (posiblesSubRazas.isEmpty) {
-        return const Left("Raza sin sub razas");
-      }
-      return Right(posiblesSubRazas);
+  factory RegistroRaza.constructor({
+    required List propuestaMensaje,
+    required String propuestaStatus,
+  }) {
+    if (propuestaMensaje == "Breed not found (master breed does not exist)") {
+      throw mensajeRegistradoRazaError;
     }
 
-    if (propuestaRaza.trim().isEmpty) {
-      throw Right(mensajeRegistradoRazaError);
+    if (propuestaStatus == "error") {
+      throw mensajeRegistradoRazaError;
     }
-    var estadoSubRaza = checkSubRazas_(propuestaSubRazas);
-    return RegistroRaza._(propuestaRaza, estadoSubRaza);
+
+    RegistroRaza._(propuestaMensaje, propuestaStatus);
+
+    final resultado = RegistroRaza._(propuestaMensaje, propuestaStatus);
+
+    return resultado;
   }
 }
