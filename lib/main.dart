@@ -1,5 +1,6 @@
 import 'package:dog_app/bloc/bloc.dart';
 import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_creandose.dart';
+import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_solicitando_raza.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -32,6 +33,9 @@ class Aplicacion extends StatelessWidget {
 
           if (estado is Creandose) {
             return const VistaCreandose();
+          }
+          if (estado is SolicitandoRaza) {
+            return const VistaSolicitandoRaza();
           }
           return const Center(
             child: Text("Este mensaje es una alerta"),
