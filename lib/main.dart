@@ -1,6 +1,8 @@
 import 'package:dog_app/bloc/bloc.dart';
 import 'package:dog_app/caracteristicas/repositorio_verificacion.dart';
 import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_creandose.dart';
+import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_raza_confirmada.dart';
+import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_raza_sin_subrazas.dart';
 import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_solicitando_raza.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -44,6 +46,12 @@ class Aplicacion extends StatelessWidget {
           }
           if (estado is SolicitandoRaza) {
             return const VistaSolicitandoRaza();
+          }
+          if (estado is MostrandoRazaConfirmada) {
+            return VistaRazaConfirmada(estado.registroRaza, estado.nombreRaza);
+          }
+          if (estado is MostrandoRazaSinSubRazas) {
+            return VistaRazaSinSubRazas(estado.nombreRazaSinSubRazas);
           }
           return const Center(
             child: Text("Este mensaje es una alerta"),
