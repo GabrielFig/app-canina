@@ -14,7 +14,13 @@ class AplicacionInyectada extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => BlocVerificacion(),
+      create: (context) {
+        BlocVerificacion blocVerificacion = BlocVerificacion();
+        Future.delayed(const Duration(seconds: 2), () {
+          blocVerificacion.add(Creado());
+        });
+        return blocVerificacion;
+      },
       child: const Aplicacion(),
     );
   }
