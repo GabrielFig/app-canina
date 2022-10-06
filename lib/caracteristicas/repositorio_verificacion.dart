@@ -12,8 +12,8 @@ abstract class repositoriVerificacion {
 List campos = ['status', 'message'];
 
 class RepositorioPruebasVerificacion extends repositoriVerificacion {
-  final String _hound =
-      """{"message":["afghan","basset","blood","english","ibizan","plott","walker"],"status":"success"} """;
+  final String _poodle =
+      """{"message":["medium","miniature","standard","toy"],"status":"success"} """;
 
   final String _afrikan = """{"message":[],"status":"success"} """;
 
@@ -26,7 +26,7 @@ class RepositorioPruebasVerificacion extends repositoriVerificacion {
   @override
   Either<Problema, RegistroRaza> obtenerRegistroRaza(NickFormado nick) {
     if (nick.valor == 'hound') {
-      return obtenerRegistroUsuarioDesdeJSON(_hound);
+      return obtenerRegistroUsuarioDesdeJSON(_poodle);
     }
     if (nick.valor == 'afrikan') {
       return obtenerRegistroUsuarioDesdeJSON(_afrikan);
