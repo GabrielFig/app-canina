@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dog_app/dominio/problemas.dart';
 import 'package:dog_app/dominio/registro_raza.dart';
 import 'package:dog_app/dominio/variable_dominio.dart';
@@ -23,7 +25,36 @@ class RepositorioPruebasVerificacion extends repositoriVerificacion {
 
   @override
   Either<Problema, RegistroRaza> obtenerRegistroRaza(NickFormado nick) {
-    // TODO: implement obtenerRegistroRaza
-    throw UnimplementedError();
+    if (nick.valor == 'hound') {
+      return obtenerRegistroUsuarioDesdeJSON(_hound);
+    }
+    if (nick.valor == 'afrikan') {
+      return obtenerRegistroUsuarioDesdeJSON(_afrikan);
+    }
+    if (nick.valor == 'amlo') {
+      return obtenerRegistroUsuarioDesdeJSON(_amlo);
+    }
+    if (nick.valor == 'incorrecto') {
+      return Left(VersionIncorrectaJson());
+    }
+
+    return Left(RazaNoEncontrada());
   }
+}
+
+Either<Problema, RegistroRaza> obtenerRegistroUsuarioDesdeJSON(
+    String docuemnto) {
+  Map<String, dynamic> resultado = jsonDecode(docuemnto);
+
+  if (resultado['status'] == "error") {
+    return left(RazaNoEncontrada());
+  }
+
+  if (resultado['message'].isEmpty) {
+    return left(SubRazasNoEncontradas());
+  }
+
+  return Right(RegistroRaza.constructor(
+      propuestaMensaje: resultado['message'],
+      propuestaStatus: resultado['status']));
 }
