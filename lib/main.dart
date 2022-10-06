@@ -1,4 +1,5 @@
 import 'package:dog_app/bloc/bloc.dart';
+import 'package:dog_app/caracteristicas/repositorio_verificacion.dart';
 import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_creandose.dart';
 import 'package:dog_app/caracteristicas/verificaciones/vistas/vista_solicitando_raza.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +16,8 @@ class AplicacionInyectada extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) {
-        BlocVerificacion blocVerificacion = BlocVerificacion();
+        BlocVerificacion blocVerificacion =
+            BlocVerificacion(RepositorioPruebasVerificacion());
         Future.delayed(const Duration(seconds: 2), () {
           blocVerificacion.add(Creado());
         });
